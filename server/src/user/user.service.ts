@@ -5,6 +5,7 @@ import { MongoRepository } from 'typeorm';
 import { UserInput } from './user.input';
 import * as uuid from 'uuid'
 import { UserInputError } from 'apollo-server-express'
+import bcrypt from 'bcryptjs';
 @Injectable()
 export class UserService {
     constructor(
@@ -31,14 +32,13 @@ export class UserService {
         const user = new User();
         user._id = uuid.v4();
         user.username = input.username.trim();
-        user.password = input.password;
-
+        user.password = await bcrypt.hash(input.password, 12); // mã hóa password
         return this.userRepository.save(user);
     }
 
     async findAll(): Promise<User[]> {
         return await this.userRepository.find();
-    } 
+    }
 
 
 }
