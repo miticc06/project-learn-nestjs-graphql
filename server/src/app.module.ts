@@ -2,9 +2,11 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GraphQLModule } from "@nestjs/graphql";
-import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { join } from 'path';
+import { EventModule } from './event/event.module';
+import { UserModule } from './user/user.module';
+
 @Module({
   imports: [
     GraphQLModule.forRoot({
@@ -20,6 +22,7 @@ import { join } from 'path';
       logging: true
     }),
     UserModule,
+    EventModule,
   ],
   controllers: [AppController],
   providers: [AppService],

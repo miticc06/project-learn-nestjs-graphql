@@ -23,5 +23,4 @@ type AuthData {
 type Mutation {
     createUser(input: UserInput!): User
     login(input: UserInput!): AuthData!
-
 }
