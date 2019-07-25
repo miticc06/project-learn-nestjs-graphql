@@ -50,6 +50,13 @@ export class UserService {
     }
 
 
+    async findOne(userId: string): Promise<User> {
+        console.log(userId);
+        return await this.userRepository.findOne({ _id: userId });
+    }
+
+
+
     async login(input: UserInput): Promise<AuthData> {
         const user = await this.userRepository.findOne({ username: input.username });
         if (!user) {
