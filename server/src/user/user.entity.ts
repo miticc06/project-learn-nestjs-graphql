@@ -10,3 +10,8 @@ export class User {
     @Column()
     password: string;
 }
+
+export class AuthData {
+    userId: string;
+    token: string;
+}

@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './user.entity';
+import { User, AuthData } from './user.entity';
 import { MongoRepository } from 'typeorm';
 import { UserInput } from './user.input';
 import * as uuid from 'uuid'
-import { UserInputError } from 'apollo-server-express'
+import { UserInputError, AuthenticationError } from 'apollo-server-express';
 import bcrypt from 'bcryptjs';
+
 @Injectable()
 export class UserService {
     constructor(
@@ -45,6 +46,28 @@ export class UserService {
                 password: null
             }
         });
+    }
+
+
+    async login(input: UserInput): Promise<AuthData> {
+        const user = await this.userRepository.findOne({ username: input.username });
+        if (!user) {
+            throw new AuthenticationError('Wrong Password!');
+        }
+        const isCorrectPassword = bcrypt.compare(input.password, user.password);
+        if (!isCorrectPassword) {
+            throw new AuthenticationError('Wrong Password!');
+        }
+
+
+        console.log(process.env.DATABASE_USER);
+
+        // jwt.sign({}, process.env.SECRECT_KEY);
+
+        let authData = new AuthData();
+        authData.token = "ahihi";
+        authData.userId = "1234";
+        return authData;
     }
 
 

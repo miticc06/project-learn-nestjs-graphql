@@ -14,7 +14,14 @@ type Query {
     users: [User!]!
 }
 
+type AuthData {
+    userId: String!
+    token: String!
+}
+
 
 type Mutation {
     createUser(input: UserInput!): User
+    login(input: UserInput!): AuthData!
+
 }
