@@ -6,6 +6,7 @@ import { UserInput } from './user.input';
 import * as uuid from 'uuid'
 import { UserInputError, AuthenticationError } from 'apollo-server-express';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 @Injectable()
 export class UserService {
@@ -54,19 +55,15 @@ export class UserService {
         if (!user) {
             throw new AuthenticationError('Wrong Password!');
         }
-        const isCorrectPassword = bcrypt.compare(input.password, user.password);
+        const isCorrectPassword = await bcrypt.compare(input.password, user.password);
         if (!isCorrectPassword) {
             throw new AuthenticationError('Wrong Password!');
         }
-
-
-        console.log(process.env.DATABASE_USER);
-
-        // jwt.sign({}, process.env.SECRECT_KEY);
+        const token = jwt.sign({ userId: user._id }, "SECRECT_KEY");
 
         let authData = new AuthData();
-        authData.token = "ahihi";
-        authData.userId = "1234";
+        authData.token = token;
+        authData.userId = user._id;
         return authData;
     }
 
