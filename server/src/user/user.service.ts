@@ -37,7 +37,14 @@ export class UserService {
     }
 
     async findAll(): Promise<User[]> {
-        return await this.userRepository.find();
+        const listUsers = await this.userRepository.find();
+        return listUsers.map(user => {
+            return {
+                _id: user._id,
+                username: user.username,
+                password: null
+            }
+        });
     }
 
 
