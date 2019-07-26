@@ -1,13 +1,17 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, ResolveProperty, Parent } from '@nestjs/graphql';
 import { BookingService } from './booking.service';
 import { Booking } from './booking.entity';
 import { BookingInput } from './booking.input';
+import { UserService } from '../user/user.service';
+import { EventService } from '../event/event.service';
 
 @Resolver('Booking')
 export class BookingResolver {
 
     constructor(
-        private readonly bookingService: BookingService
+        private readonly bookingService: BookingService,
+        private readonly userService: UserService,
+        private readonly eventService: EventService
     ) { }
 
     @Query(() => [Booking])
@@ -20,5 +24,29 @@ export class BookingResolver {
         return this.bookingService.createBooking(bookingInput);
     }
 
+    @ResolveProperty('user')
+    async user(@Parent() booking) {
+        try {
+            const userId = booking.user; // id user tao booking
+            const user = await this.userService.findOne(userId);
+            user.password = null;
+            return user;
+
+        } catch (err) {
+            throw err;
+        }
+
+    }
+
+    @ResolveProperty('event')
+    async event(@Parent() booking) {
+        try {
+            const eventId = booking.event;
+            return await this.eventService.findOne(eventId);
+
+        } catch (error) {
+            throw error;
+        }
+    }
 
 }

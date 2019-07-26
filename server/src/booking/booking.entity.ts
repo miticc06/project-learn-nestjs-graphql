@@ -6,10 +6,10 @@ export class Booking {
     _id: string;
 
     @Column()
-    eventId: string;
+    event: string;
 
     @Column()
-    userId: string;
+    user: string;
 
     @Column()
     createdAt: string;

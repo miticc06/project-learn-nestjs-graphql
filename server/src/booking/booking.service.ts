@@ -23,12 +23,12 @@ export class BookingService {
     }
 
     async createBooking(bookingInput: BookingInput) {
-        const user = await this.userService.findOne(bookingInput.userId);
+        const user = await this.userService.findOne(bookingInput.user);
         if (!user) {
             throw new UserInputError("UserId khong hop le!");
         }
 
-        const event = await this.eventService.findOne(bookingInput.eventId);
+        const event = await this.eventService.findOne(bookingInput.event);
         if (!event) {
             throw new UserInputError("eventId khong hop le!");
         }
@@ -36,8 +36,8 @@ export class BookingService {
         const booking = new Booking();
         booking._id = uuid.v4();
         booking.createdAt = new Date().toISOString();
-        booking.eventId = bookingInput.eventId;
-        booking.userId = bookingInput.userId;
+        booking.event = bookingInput.event;
+        booking.user = bookingInput.user;
         return await this.bookingRepository.save(booking);
     }
 

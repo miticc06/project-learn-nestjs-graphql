@@ -1,4 +1,4 @@
 export class BookingInput {
-    eventId: string;
-    userId: string;
+    event: string;
+    user: string;
 }

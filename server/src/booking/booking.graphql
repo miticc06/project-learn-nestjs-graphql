@@ -1,13 +1,13 @@
 type Booking {
     _id: String!
-    eventId: String!
-    userId: String!
+    event: Event!
+    user: User!
     createdAt: String!
 }
 
 input BookingInput {
-    eventId: String!
-    userId: String!
+    event: String!
+    user: String!
 }
 
 type Query {

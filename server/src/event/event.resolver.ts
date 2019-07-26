@@ -18,8 +18,8 @@ export class EventResolver {
     }
 
     @ResolveProperty('creator') // phải trùng với tên property
-    async creator(@Parent() user) { // đặt sao cũng dc
-        const creatorId = user.creator;
+    async creator(@Parent() event) { // đặt sao cũng dc
+        const creatorId = event.creator; // id của ng tạo event
         let userRes = await this.userService.findOne(creatorId);
         userRes.password = null;
         return userRes;
