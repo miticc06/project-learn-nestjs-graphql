@@ -18,6 +18,10 @@ export class EventService {
         return this.eventRepository.find();
     }
 
+    async findOne(eventId: string): Promise<Event> {
+        return this.eventRepository.findOne({ _id: eventId });
+    }
+
     async createEvent(eventInput: EventInput): Promise<Event> {
         if (!eventInput.title || eventInput.title.trim().length === 0) {
             throw new UserInputError('title khong duoc de trong!');

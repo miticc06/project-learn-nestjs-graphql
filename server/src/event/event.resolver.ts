@@ -17,8 +17,8 @@ export class EventResolver {
         return this.eventService.findAll();
     }
 
-    @ResolveProperty('creator')
-    async creator(@Parent() user) {
+    @ResolveProperty('creator') // phải trùng với tên property
+    async creator(@Parent() user) { // đặt sao cũng dc
         const creatorId = user.creator;
         let userRes = await this.userService.findOne(creatorId);
         userRes.password = null;

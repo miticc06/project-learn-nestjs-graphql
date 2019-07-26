@@ -1,0 +1,19 @@
+type Booking {
+    _id: String!
+    eventId: String!
+    userId: String!
+    createdAt: String!
+}
+
+input BookingInput {
+    eventId: String!
+    userId: String!
+}
+
+type Query {
+    bookings: [Booking!]!
+}
+
+type Mutation { 
+    createBooking(bookingInput: BookingInput!): Booking!
+}
