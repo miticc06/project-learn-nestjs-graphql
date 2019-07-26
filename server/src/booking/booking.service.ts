@@ -22,7 +22,11 @@ export class BookingService {
         return await this.bookingRepository.find();
     }
 
-    async createBooking(bookingInput: BookingInput) {
+    async findOne(bookingId: string): Promise<Booking> {
+        return await this.bookingRepository.findOne({ _id: bookingId });
+    }
+
+    async createBooking(bookingInput: BookingInput): Promise<Booking> {
         const user = await this.userService.findOne(bookingInput.user);
         if (!user) {
             throw new UserInputError("UserId khong hop le!");
@@ -39,6 +43,26 @@ export class BookingService {
         booking.event = bookingInput.event;
         booking.user = bookingInput.user;
         return await this.bookingRepository.save(booking);
+    }
+
+    async cancelBooking(bookingId: string, userId: string): Promise<Booking> { // userId này sau này sẽ get từ token ra
+        const booking = await this.findOne(bookingId);
+        if (!booking) {
+            throw new UserInputError('bookingId khong hop le!');
+        }
+
+        const userBooking = await this.userService.findOne(userId);
+        if (!userBooking) {
+            throw new UserInputError('UserId khong hop le!');
+        }
+
+        if (userBooking._id !== booking.user) {
+            throw new UserInputError('Ban khong co quyen cancel booking!');
+        }
+
+        await this.bookingRepository.deleteOne({ _id: bookingId });
+
+        return booking;
     }
 
 }

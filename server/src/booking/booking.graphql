@@ -16,4 +16,5 @@ type Query {
 
 type Mutation { 
     createBooking(bookingInput: BookingInput!): Booking!
+    cancelBooking(bookingId: String!, userId: String!): Booking!
 }

@@ -24,6 +24,11 @@ export class BookingResolver {
         return this.bookingService.createBooking(bookingInput);
     }
 
+    @Mutation(() => Booking) //cancelBooking(bookingId: String!, userId: String!): Booking!
+    async cancelBooking(@Args('bookingId') bookingId: string, @Args('userId') userId: string) {
+        return this.bookingService.cancelBooking(bookingId, userId);
+    }
+
     @ResolveProperty('user')
     async user(@Parent() booking) {
         try {
