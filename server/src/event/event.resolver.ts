@@ -12,11 +12,17 @@ export class EventResolver {
     ) { }
 
 
+    @Query(() => [Event!]!)
+    async events() {
+        return this.eventService.findAll();
+    }
+
     @ResolveProperty('creator')
     async creator(@Parent() user) {
         const creatorId = user.creator;
-        let userres = new User();
-        return await this.userService.findOne(creatorId);
+        let userRes = await this.userService.findOne(creatorId);
+        userRes.password = null;
+        return userRes;
     }
 
     @Mutation(() => [Event])

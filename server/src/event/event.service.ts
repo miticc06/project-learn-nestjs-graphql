@@ -11,11 +11,11 @@ export class EventService {
     constructor(
         @InjectRepository(Event)
         private readonly eventRepository: MongoRepository<Event>
-        // ,
-        // @InjectRepository(Event)
-        // private readonly userRepository: MongoRepository<User>
-
     ) {
+    }
+
+    async findAll(): Promise<Event[]> {
+        return this.eventRepository.find();
     }
 
     async createEvent(eventInput: EventInput): Promise<Event> {
