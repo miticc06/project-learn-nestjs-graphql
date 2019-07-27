@@ -28,6 +28,7 @@
     "bcryptjs": "^2.4.3",
     "graphql": "^14.4.2",
     "graphql-tools": "^4.0.5",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.3.0-beta2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^2.6.2",
