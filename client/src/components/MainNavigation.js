@@ -32,45 +32,17 @@ const mainNavigation = props => {
                 <Menu.Item key="3">
                     <Icon type="thunderbolt" />
                     <span className="nav-text">Events</span>
+                    <NavLink to="/Events"></NavLink>
                 </Menu.Item>
                 <Menu.Item key="4">
                     <Icon type="carry-out" />
                     <span className="nav-text">Bookings</span>
+                    <NavLink to="/Bookings"></NavLink>
+
                 </Menu.Item>
             </Menu>
         </Sider>
     );
 }
-
-
-/*
-
-
-
-const mainNavigation = props => {
-    return (
-
-        <header className="main-navigation">
-
-            <div className="main-navigation__logo">
-                Easy Event
-            </div>
-
-            <ul>
-                <li>
-                    <NavLink to="/">Home</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/auth">Auth</NavLink>
-                </li>
-
-            </ul>
-
-        </header>
-    );
-}
-
-
-*/
 
 export default mainNavigation;
