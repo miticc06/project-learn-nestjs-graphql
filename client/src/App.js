@@ -9,7 +9,7 @@ import HomePage from './pages/Home';
 import EventsPage from './pages/Events';
 import BookingsPage from './pages/Bookings';
 
-import MainNavigation from './components/MainNavigation';
+import MainNavigation from './components/Navigation/MainNavigation';
 import { Layout, Menu, Icon } from 'antd';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -21,10 +21,6 @@ function App() {
     <BrowserRouter>
       <React.Fragment>
 
-        {/* <MainNavigation></MainNavigation> */}
-
-
-
         <Layout>
           <MainNavigation></MainNavigation>
           <Layout>
@@ -32,13 +28,8 @@ function App() {
             <Content style={{ margin: '24px 16px 0' }}>
               <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
 
-
-
-
-
                 <main>
                   <Switch>
-                    {/* <Route path="/" component={HomePage}></Route> */}
                     <Redirect from="/" to="/home" exact></Redirect>
                     <Route path="/home" component={HomePage}></Route>
                     <Route path="/auth" component={AuthPage}></Route>
@@ -47,24 +38,11 @@ function App() {
                   </Switch>
                 </main>
 
-
-
-
-
-
               </div>
             </Content>
             <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
           </Layout>
         </Layout>
-
-
-
-
-
-
-
-
 
       </React.Fragment>
 

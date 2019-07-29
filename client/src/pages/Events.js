@@ -1,8 +1,20 @@
 import React, { Component } from "react";
+import { Row, Col } from "antd";
 
 class EventPage extends Component {
     render() {
-        return <h1> EventPage</h1>
+        return (
+            <React.Fragment>
+                <h1> Events Page</h1>
+                <Row>
+                    <Col span={12} offset={6}>
+                        col-8
+                </Col>
+                </Row>
+            </React.Fragment>
+
+
+        );
     }
 }
 
