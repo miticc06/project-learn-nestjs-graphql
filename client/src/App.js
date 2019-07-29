@@ -6,7 +6,9 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import AuthPage from './pages/Auth';
 import HomePage from './pages/Home';
 import MainNavigation from './components/MainNavigation';
+import { Layout, Menu, Icon } from 'antd';
 
+const { Header, Content, Footer, Sider } = Layout;
 
 
 function App() {
@@ -15,18 +17,50 @@ function App() {
     <BrowserRouter>
       <React.Fragment>
 
-        <MainNavigation></MainNavigation>
+        {/* <MainNavigation></MainNavigation> */}
 
-        <main>
-          <Switch>
-            {/* <Route path="/" component={HomePage}></Route> */}
-            <Redirect from="/" to="/home" exact></Redirect>
-            <Route path="/home" component={HomePage}></Route>
-            <Route path="/auth" component={AuthPage}></Route>
-            <Route path="/bookings" component={null}></Route>
-            <Route path="/events" component={null}></Route>
-          </Switch>
-        </main>
+
+
+        <Layout>
+          <MainNavigation></MainNavigation>
+          <Layout>
+            <Header style={{ background: '#fff', padding: 0 }} />
+            <Content style={{ margin: '24px 16px 0' }}>
+              <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+
+
+
+
+
+                <main>
+                  <Switch>
+                    {/* <Route path="/" component={HomePage}></Route> */}
+                    <Redirect from="/" to="/home" exact></Redirect>
+                    <Route path="/home" component={HomePage}></Route>
+                    <Route path="/auth" component={AuthPage}></Route>
+                    <Route path="/bookings" component={null}></Route>
+                    <Route path="/events" component={null}></Route>
+                  </Switch>
+                </main>
+
+
+
+
+
+
+              </div>
+            </Content>
+            <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+          </Layout>
+        </Layout>
+
+
+
+
+
+
+
+
 
       </React.Fragment>
 
