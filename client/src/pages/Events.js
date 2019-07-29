@@ -42,7 +42,7 @@ class EventPage extends Component {
                 price: this.state.price,
                 date: this.state.date
             },
-            refetchQueries: [{ query: getEventsQuery }]
+            refetchQueries: [{ query: getEventsQuery }] // lấy lại list event
         });
 
         this.setState({
@@ -77,6 +77,15 @@ class EventPage extends Component {
     render() {
         const { visible, confirmLoading, ModalText } = this.state;
         let date = new Date();
+
+        // let listEvent = this.props.getEventsQuery.events || [];
+        // listEvent.reverse();
+
+        const listEvent = [];
+        (this.props.getEventsQuery.events || []).map(event => {
+            listEvent.unshift(event);
+        })
+
 
         return (
             <React.Fragment>
@@ -120,9 +129,9 @@ class EventPage extends Component {
                             // loading={initLoading}
                             itemLayout="horizontal"
                             // loadMore={loadMore}
-                            dataSource={(this.props.getEventsQuery.events || []).reverse()} // source data list events
+                            dataSource={listEvent} // source data list events
 
-                            dataSource={this.props.getEventsQuery.events} // source data list events
+                            //dataSource={this.props.getEventsQuery.events} // source data list events
                             renderItem={item => (
                                 <List.Item actions={[<a>edit</a>, <a>more</a>]}>
                                     <Skeleton avatar title={false} loading={item.loading} active>
