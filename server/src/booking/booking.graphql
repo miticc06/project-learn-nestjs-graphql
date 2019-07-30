@@ -7,7 +7,7 @@ type Booking {
 
 input BookingInput {
     event: String!
-    # user: String!
+    user: String!
 }
 
 type Query {

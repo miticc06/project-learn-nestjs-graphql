@@ -19,9 +19,9 @@ export class BookingResolver {
     ) { }
 
     @Query(() => [Booking])
-    async bookings(@UserId() user: any) {
+    async bookings(@UserId() userId: any) {
 
-        console.log(user);
+        console.log(userId);
 
         return this.bookingService.findAll();
     }

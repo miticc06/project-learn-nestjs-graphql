@@ -41,7 +41,7 @@ export class BookingService {
         booking._id = uuid.v4();
         booking.createdAt = new Date().toISOString();
         booking.event = bookingInput.event;
-        booking.user = "1"// bookingInput.user;
+        booking.user = bookingInput.user;
         return await this.bookingRepository.save(booking);
     }
 
