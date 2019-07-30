@@ -32,5 +32,15 @@ const addEventMutation = gql`
     }
 `;
 
+const loginUserMutation = gql`
+    mutation ($username:String!, $password: String!){
+        login(input:{username : $username, password: $password}) {
+            userId
+            token
+        }
+    }
+`;
 
-export { getEventsQuery, addEventMutation };
+
+
+export { getEventsQuery, addEventMutation, loginUserMutation };
